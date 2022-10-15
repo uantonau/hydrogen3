@@ -1,0 +1,18 @@
+<strings>
+    <string id="AppName">Гелий-3</string>
+    
+    <string id="MarksColorTitle">Цвет меток</string>
+    <string id="AccentColorTitle">Цвет 12-ти часовой метки</string>
+    <string id="ShowBattery">Показывать уровень заряда батареи</string>
+    
+    <string id="ColorBlack">Чёрный</string>
+    <string id="ColorDarkGray">Тёмно-серый</string>
+    <string id="ColorLightGray">Светло-серый</string>
+    <string id="ColorWhite">Белый</string>
+    <string id="ColorBlue">Синий</string>
+    <string id="ColorGreen">Зелёный</string>
+    <string id="ColorRed">Красный</string>
+    <string id="ColorOrange">Оранжевый</string>
+    <string id="ColorYellow">Жёлтый</string>
+    <string id="ColorPurple">Фиолетовый</string>
+</strings>

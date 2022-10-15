@@ -1,0 +1,8 @@
+<resources>
+    <fonts>
+		<font id="ZzzSmall" filename="fonts/zzz_small.fnt" filter="0123456789" />
+		<font id="ZzzMedium" filename="fonts/zzz_medium.fnt" filter="0123456789" />
+		<font id="ZzzDate" filename="fonts/zzz_date.fnt" filter="0123456789" />
+		<font id="ZzzH3" filename="fonts/zzz_h3.fnt" filter="3H" />
+    </fonts>
+</resources>

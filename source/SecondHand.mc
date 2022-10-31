@@ -7,6 +7,7 @@ class SecondHand {
 	private var scp;    
 	
 	private static var handColor = Application.getApp().getProperty("AccentColor");
+	private static var noHarborColor = ColorUtil.darkerColor(Graphics.COLOR_WHITE);
    
 //   	private var line = [[0,35],[0,-100]];
 //   	private var box = [[-4, 40],[-4,-100],[4,-100],[4,40]];
@@ -46,6 +47,11 @@ class SecondHand {
    	public function drawHarbor(dc) {
     	dc.setColor(handColor, Graphics.COLOR_TRANSPARENT);
     	dc.fillCircle(centerPoint[0], centerPoint[1], harborSize);
+   	}
+
+	public function drawNoHarbor(dc) {
+    	dc.setColor(noHarborColor, Graphics.COLOR_TRANSPARENT);
+    	dc.fillCircle(centerPoint[0], centerPoint[1], harborSize/2);
    	}
    	
    	public static function refreshColors() {

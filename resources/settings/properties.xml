@@ -2,4 +2,5 @@
     <property id="AccentColor" type="number">0xFF0000</property>
     <property id="MarksColor" type="number">0xFF0000</property>
     <property id="ShowBattery" type="boolean">true</property>
+    <property id="ShowSecondsHand" type="boolean">true</property>
 </properties>

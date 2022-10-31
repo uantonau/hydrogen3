@@ -109,9 +109,12 @@ class AppFaceView extends WatchUi.WatchFace {
 		minuteHand.set(minuteHandAngle);
 		minuteHand.draw(targetDc);
 		
-		if (partialUpdatesAllowed || (isAwake != null && isAwake)) {
-			secondHand.drawHarbor(targetDc);
-		}
+		if (Application.getApp().getProperty("ShowSecondsHand") &&
+            (partialUpdatesAllowed || (isAwake != null && isAwake))) {
+			    secondHand.drawHarbor(targetDc);
+		} else {
+            secondHand.drawNoHarbor(targetDc);
+        }
 		
         // Output the offscreen buffers to the main display if required.
         drawBackground(dc);
@@ -120,7 +123,7 @@ class AppFaceView extends WatchUi.WatchFace {
             // If this device supports partial updates and they are currently
             // allowed run the onPartialUpdate method to draw the second hand.
             onPartialUpdate( dc );
-        } else if ( isAwake ) {
+        } else if ( isAwake && Application.getApp().getProperty("ShowSecondsHand")) {
             // Otherwise, if we are out of sleep mode, draw the second hand
             // directly in the full update method.
             dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
@@ -134,26 +137,27 @@ class AppFaceView extends WatchUi.WatchFace {
 
     // Handle the partial update event
     function onPartialUpdate( dc ) {
-    
-    
-        // If we're not doing a full screen refresh we need to re-draw the background
-        // before drawing the updated second hand position. Note this will only re-draw
-        // the background in the area specified by the previously computed clipping region.
-        if(!fullScreenRefresh) {
-        	dc.setClip(curClip[0][0], curClip[0][1], curClip[2][0], curClip[2][1]);
-            drawBackground(dc);
+        if (Application.getApp().getProperty("ShowSecondsHand")) {
+
+            // If we're not doing a full screen refresh we need to re-draw the background
+            // before drawing the updated second hand position. Note this will only re-draw
+            // the background in the area specified by the previously computed clipping region.
+            if(!fullScreenRefresh) {
+                dc.setClip(curClip[0][0], curClip[0][1], curClip[2][0], curClip[2][1]);
+                drawBackground(dc);
+            }
+
+            var clockTime = System.getClockTime();
+            var secondHandAngle = (clockTime.sec / 60.0) * PI * 2;
+            secondHand.set(secondHandAngle);
+
+            // Update the cliping rectangle to the new location of the second hand.
+            curClip = Util.getBoundingBox(secondHand.getBox());
+            dc.setClip(curClip[0][0], curClip[0][1], curClip[2][0], curClip[2][1]);
+
+            // Draw the second hand to the screen.
+            secondHand.draw(dc);
         }
-
-        var clockTime = System.getClockTime();
-        var secondHandAngle = (clockTime.sec / 60.0) * PI * 2;
-        secondHand.set(secondHandAngle);
-
-        // Update the cliping rectangle to the new location of the second hand.
-        curClip = Util.getBoundingBox(secondHand.getBox());
-        dc.setClip(curClip[0][0], curClip[0][1], curClip[2][0], curClip[2][1]);
-
-        // Draw the second hand to the screen.
-		secondHand.draw(dc);
     }
 
     // Draw the watch face background
